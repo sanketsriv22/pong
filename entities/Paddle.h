@@ -6,7 +6,7 @@ class Paddle
 {
 protected: // visibility limited to this class and subclasses (cpuPaddle)
     void LimitMovement();
-    static const Vector2 size;
+    static const Vector2 size; // all paddles have same size
 
 public:
     Vector2 position;

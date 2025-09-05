@@ -3,6 +3,7 @@
 
 CpuPaddle::CpuPaddle()
 {
+    position = {SCREEN_WIDTH - PADDLE_SIZE.x/2, SCREEN_HEIGHT/2 - PADDLE_SIZE.y/2};
     color = CPU_COLOR;
     speed = CPU_SPEED;
 }

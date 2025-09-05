@@ -1,4 +1,5 @@
 #pragma once
+#include "raylib.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 800;
@@ -11,3 +12,6 @@ const Color CPU_COLOR = RED;
 
 const Vector2 PADDLE_SIZE = {25, 120};
 
+const Vector2 BALL_INITIAL_POSITION = {SCREEN_WIDTH/2, SCREEN_HEIGHT/2};
+const int BALL_RADIUS = 20;
+const Vector2 BALL_SPEED = {15, 15};

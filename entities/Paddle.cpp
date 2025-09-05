@@ -5,7 +5,8 @@
 
 const Vector2 Paddle::size = PADDLE_SIZE; // construct the paddle size
 
-Paddle::Paddle() : position{0, 0}, speed{PLAYER_SPEED}, color{PLAYER_COLOR}, score{0} {}
+Paddle::Paddle() : 
+position{0, SCREEN_HEIGHT/2 - PADDLE_SIZE.y/2}, speed{PLAYER_SPEED}, color{PLAYER_COLOR}, score{0} {}
 
 void Paddle::LimitMovement()
 {

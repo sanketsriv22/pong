@@ -25,8 +25,8 @@ class Ball
 public:
     Vector2 position;
     const float radius;
-    int speedX, speedY;
-    Ball() : position{SCREEN_WIDTH/2, SCREEN_HEIGHT/2}, radius{20}, speedX{15}, speedY{15} {}
+    Vector2 speed;
+    Ball() : position{BALL_INITIAL_POSITION}, radius{BALL_RADIUS}, speed{BALL_SPEED} {}
     
     void Draw()
     {
@@ -35,24 +35,23 @@ public:
 
     void UpdatePosition()
     {
-        position.x += speedX;
-        position.y += speedY;
+        position.x += speed.x;
+        position.y += speed.y;
 
         // Bounce off top and bottom
         if (position.y + radius >= SCREEN_HEIGHT || position.y - radius <= 0)
-            speedY = -speedY;
+            speed.y = -speed.y;
     }
 
     void ResetPosition()
     {
-        position.x = SCREEN_WIDTH/2;
-        position.y = SCREEN_HEIGHT/2;
+        position = BALL_INITIAL_POSITION;
     }
 
     void paddleCollision()
     {
         // reverse X direction if collision occurs
-        speedX *= -1;
+        speed.x *= -1;
     }
 
     Paddle* WhoScored(Paddle *player, Paddle *cpu)
@@ -69,21 +68,21 @@ public:
 
 void DrawLoseScreen()
 {
-    DrawText("Game Over!", GetScreenWidth()/2 - 325, GetScreenHeight()/2 - 200, 100, RED);
-    DrawText("Press Enter to Play Again", GetScreenWidth()/2 - 350, (GetScreenHeight()/2) - 100 , 50, WHITE);
-    DrawText("Press ESC to Quit", GetScreenWidth()/2 - 250, (GetScreenHeight()/2) + 50 , 50, WHITE);
+    DrawText("Game Over!", SCREEN_WIDTH/2 - 325, SCREEN_HEIGHT/2 - 200, 100, RED);
+    DrawText("Press Enter to Play Again", SCREEN_WIDTH/2 - 350, (SCREEN_HEIGHT/2) - 100 , 50, WHITE);
+    DrawText("Press ESC to Quit", SCREEN_WIDTH/2 - 250, (SCREEN_HEIGHT/2) + 50 , 50, WHITE);
 }
 
 void DrawWinScreen()
 {
-    DrawText("You Win!", GetScreenWidth()/2 - 275, GetScreenHeight()/2 - 200, 100, BLUE);
-    DrawText("Press Enter to Play Again", GetScreenWidth()/2 - 350, (GetScreenHeight()/2) - 100 , 50, WHITE);
-    DrawText("Press ESC to Quit", GetScreenWidth()/2 - 250, (GetScreenHeight()/2) + 50 , 50, WHITE);
+    DrawText("You Win!", SCREEN_WIDTH/2 - 275, SCREEN_HEIGHT/2 - 200, 100, BLUE);
+    DrawText("Press Enter to Play Again", SCREEN_WIDTH/2 - 350, (SCREEN_HEIGHT) - 100 , 50, WHITE);
+    DrawText("Press ESC to Quit", SCREEN_WIDTH/2 - 250, (SCREEN_HEIGHT/2) + 50 , 50, WHITE);
 }
 
 void DrawMainMenu()
 {
-    DrawText("Press Enter to Play", GetScreenWidth()/2 - 500, GetScreenHeight()/2 - 100, 100, WHITE);
+    DrawText("Press Enter to Play", SCREEN_WIDTH/2 - 500, SCREEN_HEIGHT/2 - 100, 100, WHITE);
 }
 
 int main()
@@ -102,14 +101,14 @@ int main()
     Line midLine { Vector2{ SCREEN_WIDTH/2, 0 }, Vector2{ SCREEN_WIDTH/2, SCREEN_HEIGHT }, GRAY };
 
     // initial paddle locations
-    player.position.y = SCREEN_HEIGHT/2 - PADDLE_SIZE.y/2;
+    // player.position.y = SCREEN_HEIGHT/2 - PADDLE_SIZE.y/2;
 
-    cpu.position.x = SCREEN_WIDTH - PADDLE_SIZE.x;
-    cpu.position.y = SCREEN_HEIGHT/2 - PADDLE_SIZE.y/2;
+    // cpu.position.x = SCREEN_WIDTH - PADDLE_SIZE.x;
+    // cpu.position.y = SCREEN_HEIGHT/2 - PADDLE_SIZE.y/2;
 
     // initialize paddle colors
-    player.color = BLUE;
-    cpu.color = RED;
+    // player.color = BLUE;
+    // cpu.color = RED;
 
     // scoreboard text
     const char scores[5] {'0', '1', '2', '3', '\0'};
@@ -150,7 +149,7 @@ int main()
                 if (Paddle* scorer = ball.WhoScored(&player, &cpu))
                 {
                     scorer->AddScore();
-                    if (scorer->score == 3) {
+                    if (scorer->score == POINTS_TO_WIN) {
                         if (scorer == &player) {
                             currentState = GameState::WIN;
                         } else {
