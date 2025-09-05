@@ -19,23 +19,23 @@ ___
 ### Prerequisites
 - **C++ compiler** ('clang++' or 'g++')
 - **Raylib** (installed via Homebrew on macOS):
-  '''bash
+  ```bash
   brew install raylib
-
+  ```
 ## Clone the Repo
-'''bash
+```bash
 git clone https://github.com/sanketsriv22/pong.git
-
 cd pong
+```
 
 ## Build and Run
 If using VSCode, just run build task (Cmd + Shift + B)
-'''bash
+```bash
 g++ -std=c++20 -I/opt/homebrew/Cellar/raylib/5.5/include \
     -L/opt/homebrew/Cellar/raylib/5.5/lib \
     -lraylib *.cpp -o Pong
-
 ./Pong
+```
 
 ## Controls
 - W (up), S (down) -> move player paddle
