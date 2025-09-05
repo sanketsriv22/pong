@@ -1,0 +1,11 @@
+# Compiled object files
+*.o
+*.out
+
+# Build folders
+build/
+bin/
+
+# VSCode
+.vscode/
+
