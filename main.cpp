@@ -1,9 +1,9 @@
 #include <format>
 #include <iostream>
 #include "raylib.h"
-
-const int SCREEN_WIDTH = 1280;
-const int SCREEN_HEIGHT = 800;
+#include "Constants.h"
+#include "Paddle.h"
+#include "CpuPaddle.h"
 
 enum class GameState
 {
@@ -11,76 +11,6 @@ enum class GameState
     WIN,
     LOSE,
     MAIN_MENU
-};
-
-class Paddle
-{
-protected: // visibility limited to this class and subclasses (cpuPaddle)
-    void LimitMovement()
-    {
-        // keep within vertical bounds
-        if (position.y <= 0) position.y = 0;
-        if (position.y >= (SCREEN_HEIGHT - size.y)) position.y = SCREEN_HEIGHT - size.y;
-    }
-
-public:
-    Vector2 position;
-    const Vector2 size;
-    int speed;
-    Color color;
-    int score;
-
-    Paddle() : position{0, 0}, size{25, 120}, speed{10}, color{WHITE}, score{0} {}
-
-    void Draw()
-    {
-        DrawRectangle(position.x, position.y, size.x, size.y, color);
-    }
-    
-    void UpdatePosition()
-    {
-        // move up and down
-        if (IsKeyDown(KEY_W))
-        {
-            position.y -= speed;
-        }
-        if (IsKeyDown(KEY_S))
-        {
-            position.y += speed;
-        }
-
-        LimitMovement();
-    }
-
-    void AddScore()
-    {
-        score ++;
-    }
-
-    void ResetScore()
-    {
-        score = 0;
-    }
-
-};
-
-class CpuPaddle: public Paddle
-{
-public:
-    // automatic movement
-    void UpdatePosition(int ballY) 
-    {
-        if (position.y + size.y/2 > ballY)
-        {
-            position.y -= speed;
-        }
-        if (position.y + size.y/2 < ballY)
-        {
-            position.y += speed;
-        }
-
-        LimitMovement();
-    }
 };
 
 struct Line 
@@ -172,10 +102,10 @@ int main()
     Line midLine { Vector2{ SCREEN_WIDTH/2, 0 }, Vector2{ SCREEN_WIDTH/2, SCREEN_HEIGHT }, GRAY };
 
     // initial paddle locations
-    player.position.y = SCREEN_HEIGHT/2 - player.size.y/2;
+    player.position.y = SCREEN_HEIGHT/2 - PADDLE_SIZE.y/2;
 
-    cpu.position.x = SCREEN_WIDTH - cpu.size.x;
-    cpu.position.y = SCREEN_HEIGHT/2 - cpu.size.y/2;
+    cpu.position.x = SCREEN_WIDTH - PADDLE_SIZE.x;
+    cpu.position.y = SCREEN_HEIGHT/2 - PADDLE_SIZE.y/2;
 
     // initialize paddle colors
     player.color = BLUE;
@@ -210,8 +140,8 @@ int main()
                 cpu.UpdatePosition(ball.position.y);
 
                 // Check for paddle collision
-                if (CheckCollisionCircleRec(ball.position, ball.radius, Rectangle{player.position.x, player.position.y, player.size.x, player.size.y})
-                    || CheckCollisionCircleRec(ball.position, ball.radius, Rectangle{cpu.position.x, cpu.position.y, cpu.size.x, cpu.size.y}))
+                if (CheckCollisionCircleRec(ball.position, ball.radius, Rectangle{player.position.x, player.position.y, PADDLE_SIZE.x, PADDLE_SIZE.y})
+                    || CheckCollisionCircleRec(ball.position, ball.radius, Rectangle{cpu.position.x, cpu.position.y, PADDLE_SIZE.x, PADDLE_SIZE.y}))
                 {
                     ball.paddleCollision();
                 }
