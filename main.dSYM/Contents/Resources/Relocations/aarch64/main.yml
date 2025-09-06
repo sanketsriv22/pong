@@ -1,6 +1,6 @@
 ---
 triple:          'arm64-apple-darwin'
-binary-path:     '/Users/sanket/Desktop/c_projects/pong/Pong'
+binary-path:     '/Users/sanket/Desktop/c_projects/pong/main'
 relocations:
   - { offsetInCU: 0x366F, offset: 0x366F, size: 0x8, addend: 0x0, symName: __ZNSt3__124__put_character_sequenceB8ue170006IcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_PKS4_m, symObjAddr: 0xDF8, symBinAddr: 0x100003068, symSize: 0x1EC }
   - { offsetInCU: 0x5006, offset: 0x5006, size: 0x8, addend: 0x0, symName: __ZNSt3__1lsB8ue170006INS_11char_traitsIcEEEERNS_13basic_ostreamIcT_EES6_PKc, symObjAddr: 0x7C4, symBinAddr: 0x100002A34, symSize: 0x48 }

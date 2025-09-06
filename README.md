@@ -3,6 +3,9 @@
 A Pong clong build in **C++** using the Raylib game programming library.
 This project is part of my practice learning C++ and to upgrade its format as if it were production-ready.
 
+## GIF
+![Pong Gameplay](assets/pong.gif)
+
 ___
 
 ## Features
