@@ -7,7 +7,7 @@ const int SCREEN_HEIGHT = 800;
 const int PLAYER_SPEED = 10;
 const Color PLAYER_COLOR = BLUE;
 
-const int CPU_SPEED = 1;
+const int CPU_SPEED = 5;
 const Color CPU_COLOR = RED;
 
 const Color MIDLINE_COLOR = GRAY;
