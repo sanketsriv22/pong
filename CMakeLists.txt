@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Collect all sources (recursively)
 file(GLOB_RECURSE SOURCES
+    CMAKE_CONFIGURE_DEPENDS
     ${CMAKE_SOURCE_DIR}/main.cpp
     ${CMAKE_SOURCE_DIR}/Game.cpp
     ${CMAKE_SOURCE_DIR}/entities/*.cpp

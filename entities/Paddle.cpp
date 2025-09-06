@@ -20,19 +20,24 @@ void Paddle::Draw()
     DrawRectangle(position.x, position.y, size.x, size.y, color);
 }
 
-void Paddle::UpdatePosition()
+void Paddle::UpdatePosition(float ballY)
 {
-    // move up and down
-    if (IsKeyDown(PLAYER_UP_KEY))
-    {
-        position.y -= speed;
-    }
-    if (IsKeyDown(PLAYER_DOWN_KEY))
-    {
-        position.y += speed;
-    }
+    
+}
 
-    LimitMovement();
+Vector2 Paddle::GetPosition() const
+{
+    return position;
+}
+
+int Paddle::GetSpeed() const
+{
+    return speed;
+}
+
+const Vector2 Paddle::GetSize() const
+{
+    return size;
 }
 
 void Paddle::AddScore()

@@ -5,8 +5,9 @@
 class CpuPaddle: public Paddle
 {
 public:
+    int targetY;
     CpuPaddle();
 
     // automatic movement
-    void UpdatePosition(int ballY);
+    void UpdatePosition(float ballY) override;
 };
