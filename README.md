@@ -13,7 +13,7 @@ ___
 - Player and CPU paddles with collision detection.
 - Scoreboard system (first to 3 points wins).
 - Multiple game states (Main Menu, Playing, Win/Lose).
-- Structured with classes (Ball, Paddle, Human/CpuPaddle).
+- Structured with classes (Ball, Paddle, Human/CpuPaddle) and method implementation to showcase encapsulation, inheritance, and polymorphism.
 
 ---
 
