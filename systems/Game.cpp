@@ -69,31 +69,33 @@ void Game::HandleInput()
 
 void Game::Update()
 {
-    // Update all dynamic object positions
-    ball->UpdatePosition();
-    player->UpdatePosition();
-    cpu->UpdatePosition(ball->GetPosition().y);
-
-    // Check for paddle collision
-    if (CheckCollisionCircleRec(ball->GetPosition(), ball->GetRadius(), Rectangle{player->GetPosition().x, player->GetPosition().y, PADDLE_SIZE.x, PADDLE_SIZE.y})
-        || CheckCollisionCircleRec(ball->GetPosition(), ball->GetRadius(), Rectangle{cpu->GetPosition().x, cpu->GetPosition().y, PADDLE_SIZE.x, PADDLE_SIZE.y}))
+    if (currentState == GameState::PLAYING)
     {
-        ball->paddleCollision();
-    }
+        // Update all dynamic object positions
+        ball->UpdatePosition();
+        player->UpdatePosition();
+        cpu->UpdatePosition(ball->GetPosition().y);
 
-    // if someone scored, update their object instance score attribute
-    if (Paddle* scorer = ball->WhoScored(player.get(), cpu.get()))
-    {
-        scorer->AddScore();
-        if (scorer->score == POINTS_TO_WIN) {
-            if (scorer == player.get()) {
-                currentState = GameState::WIN;
-            } else {
-                currentState = GameState::LOSE;
-            }
-            return;
+        // Check for paddle collision
+        if (CheckCollisionCircleRec(ball->GetPosition(), ball->GetRadius(), Rectangle{player->GetPosition().x, player->GetPosition().y, PADDLE_SIZE.x, PADDLE_SIZE.y})
+            || CheckCollisionCircleRec(ball->GetPosition(), ball->GetRadius(), Rectangle{cpu->GetPosition().x, cpu->GetPosition().y, PADDLE_SIZE.x, PADDLE_SIZE.y}))
+        {
+            ball->paddleCollision();
         }
-        ball->ResetPosition();
+
+        // if someone scored, update their object instance score attribute
+        if (Paddle* scorer = ball->WhoScored(player.get(), cpu.get()))
+        {
+            scorer->AddScore();
+            if (scorer->score == POINTS_TO_WIN) {
+                if (scorer == player.get()) {
+                    currentState = GameState::WIN;
+                } else {
+                    currentState = GameState::LOSE;
+                }
+            }
+            ball->ResetPosition();
+        }
     }
 }
 
