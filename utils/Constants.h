@@ -7,7 +7,7 @@ const int SCREEN_HEIGHT = 800;
 const int PLAYER_SPEED = 10;
 const Color PLAYER_COLOR = BLUE;
 
-const int CPU_SPEED = 10;
+const int CPU_SPEED = 1;
 const Color CPU_COLOR = RED;
 
 const Color MIDLINE_COLOR = GRAY;
@@ -19,6 +19,12 @@ const int BALL_RADIUS = 20;
 const Vector2 BALL_SPEED = {15, 15};
 
 // scoreboard text
-const char scores[5] {'0', '1', '2', '3', '\0'};
-
+const char scores[8] {'0', '1', '2', '3', '4', '5', '6', '\0'};
 const int POINTS_TO_WIN = 3;
+
+struct Line 
+{
+    Vector2 start;
+    Vector2 end;
+    Color color;
+};

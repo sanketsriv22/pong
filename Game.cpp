@@ -14,13 +14,6 @@
 
 #include "raylib.h"
 
-struct Line 
-{
-    Vector2 start;
-    Vector2 end;
-    Color color;
-};
-
 void DrawLoseScreen()
 {
     DrawText("Game Over!", SCREEN_WIDTH/2 - 325, SCREEN_HEIGHT/2 - 200, 100, RED);
@@ -69,40 +62,9 @@ void Game::Run()
 
 void Game::HandleInput()
 {
-    switch (currentState)
-    {
-        case GameState::MAIN_MENU:
-        {
-            if (IsKeyPressed(KEY_ENTER)) currentState = GameState::PLAYING;
-            break;
-        }
-
-        case GameState::LOSE:
-        {
-            if (IsKeyPressed(KEY_ENTER))
-            {
-                player->ResetScore();
-                cpu->ResetScore();
-                currentState = GameState::PLAYING;
-            }
-            break;
-        }
-        case GameState::WIN:
-        {
-            if (IsKeyPressed(KEY_ENTER))
-            {
-                player->ResetScore();
-                cpu->ResetScore();
-                currentState = GameState::PLAYING;
-            }
-            break;
-        }
-        
-        case GameState::PLAYING:
-        {
-            break;
-        }   
-    }
+    InputManager iManager;
+    // pass currentState here, catch the reference on other side in order to modify
+    iManager.HandleInput(currentState, *player, *cpu); 
 }
 
 void Game::Update()
@@ -129,6 +91,7 @@ void Game::Update()
             } else {
                 currentState = GameState::LOSE;
             }
+            return;
         }
         ball->ResetPosition();
     }
