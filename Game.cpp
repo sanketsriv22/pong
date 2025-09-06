@@ -62,7 +62,6 @@ void Game::Run()
     {
         HandleInput();
         Update();
-
         Render();
     }
     CloseWindow();
@@ -74,14 +73,12 @@ void Game::HandleInput()
     {
         case GameState::MAIN_MENU:
         {
-            DrawMainMenu();
             if (IsKeyPressed(KEY_ENTER)) currentState = GameState::PLAYING;
             break;
         }
 
         case GameState::LOSE:
         {
-            DrawLoseScreen();
             if (IsKeyPressed(KEY_ENTER))
             {
                 player->ResetScore();
@@ -92,7 +89,6 @@ void Game::HandleInput()
         }
         case GameState::WIN:
         {
-            DrawWinScreen();
             if (IsKeyPressed(KEY_ENTER))
             {
                 player->ResetScore();
@@ -134,50 +130,12 @@ void Game::Update()
                 currentState = GameState::LOSE;
             }
         }
-                
         ball->ResetPosition();
     }
 }
 
 void Game::Render()
 {
-    BeginDrawing();
-    ClearBackground(BLACK);
-    switch (currentState)
-    {
-        case GameState::MAIN_MENU:
-        {
-            DrawMainMenu();
-            break;
-        }
-
-        case GameState::LOSE:
-        {
-            DrawLoseScreen();
-            break;
-        }
-        case GameState::WIN:
-        {
-            DrawWinScreen();
-            break;
-        }
-        
-        case GameState::PLAYING:
-        {
-            // Render all objects
-            ball->Draw();
-            player->Draw();
-            cpu->Draw();
-            DrawLine(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, SCREEN_HEIGHT, MIDLINE_COLOR); 
-
-            // Scoring
-            char playerScoreBuffer[2] = { scores[player->score], '\0'};
-            char cpuScoreBuffer[2] = { scores[cpu->score], '\0'};
-            DrawText(playerScoreBuffer, SCREEN_WIDTH/2 - 40, 20, 40, YELLOW);
-            DrawText(cpuScoreBuffer, SCREEN_WIDTH/2 + 25, 20, 40, YELLOW);
-            break;
-        }
-    }
-    EndDrawing();
-
+    Renderer render;
+    render.Render(currentState, *ball, *player, *cpu); // dereferenced pointers -> references
 }

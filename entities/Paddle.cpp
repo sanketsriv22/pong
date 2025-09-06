@@ -20,32 +20,13 @@ void Paddle::Draw()
     DrawRectangle(position.x, position.y, size.x, size.y, color);
 }
 
-void Paddle::UpdatePosition(float ballY)
-{
-    
-}
+void Paddle::UpdatePosition(float ballY) {} // default constructor
 
-Vector2 Paddle::GetPosition() const
-{
-    return position;
-}
+// getters
+Vector2 Paddle::GetPosition() const {return position;}
+int Paddle::GetSpeed() const {return speed;}
+const Vector2 Paddle::GetSize() const {return size;}
 
-int Paddle::GetSpeed() const
-{
-    return speed;
-}
-
-const Vector2 Paddle::GetSize() const
-{
-    return size;
-}
-
-void Paddle::AddScore()
-{
-    score ++;
-}
-
-void Paddle::ResetScore()
-{
-    score = 0;
-}
+// score logic
+void Paddle::AddScore() {score ++;}
+void Paddle::ResetScore() {score = 0;}

@@ -12,6 +12,7 @@ file(GLOB_RECURSE SOURCES
     ${CMAKE_SOURCE_DIR}/Game.cpp
     ${CMAKE_SOURCE_DIR}/entities/*.cpp
     ${CMAKE_SOURCE_DIR}/utils/*.cpp
+    ${CMAKE_SOURCE_DIR}/systems/*.cpp
 )
 
 message(STATUS "Found sources: ${SOURCES}")
