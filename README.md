@@ -45,7 +45,7 @@ brew install cmake
 ```
 Create a cmake build in the repo
 ```bash
-cmake -S . -B --build
+cmake -S . -B build
 ```
 Compile/Build (Cmd + Shift + B)
 And run
