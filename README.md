@@ -65,3 +65,4 @@ And run
 - Better AI for CPU paddle
 - Different game modes/difficulties
 - Customizable win conditions
+- Create a Docker image for ease of use for testers!
